@@ -1,0 +1,480 @@
+/* Решение проблемы с горизонтальным(нижним) скроллом при использовании sticky */
+
+body {
+    background: url("../image/town-anime.jpg") 0 0/cover no-repeat;
+    /* Убрад overflow: hidden; так как картинка широкая и может уместиться не на всех разрешениях */
+}
+
+
+.wrapper {
+    min-height: 100%;
+    
+}
+
+.everything {
+    position: relative;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%,200%);
+    max-width: 800px;
+    transition: all 1s ease 0s;
+
+}
+
+.everything:hover {
+    transform: translate(10%,200%);
+}
+
+.wrapper__glass {
+    width: 465px;
+    height: 115px;
+    border-radius: 283px 224px 150px 44px / 118px 120px 0px 0px;
+    position: relative;
+    top: 0;
+    right: -140px;
+    background: #555;
+    overflow: hidden;
+    z-index: 1;
+    /* Делал в пикселях, потому что в процентах ломалась картинка при изменении разрешения вьюпорта*/
+    
+}
+
+.glass__oval {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%,0);
+    
+    width: 463px;
+    height: 100px;
+    border-radius: 400px 300px 0px 198px / 150px 150px 15px 0px;
+    border: 2.3px solid #000;
+    border-bottom: #000;
+    position: absolute;
+    bottom: 0;
+    overflow: hidden;
+    perspective: 800px;
+}
+
+.glass__window-front {
+    border-radius: 200px 200px 186px 147px / 0px 150px 1px 0px;
+    width: 240px;
+    height: 94px;
+    border: 5px solid rgb(75, 65, 46);
+    position: absolute;
+    bottom: -1px;
+    right: 20px;
+    transform: skew(20deg);
+    background: rgb(75, 65, 46);
+}
+
+.glass__window-back {
+    width: 100px;
+    height: 57.735px;
+    background: rgb(75, 65, 46);
+    position: absolute;
+    bottom: 3px;
+    left: 100px;
+    transform: rotate(74deg);
+}
+
+.glass__window-back::before {
+    content: "";
+    width: 3px;
+    height: 112px;
+    position: absolute;
+    background: #000;
+    top: -70px;
+    right: 56.5px;
+    transform: rotate(86.5deg);
+}
+
+.glass__window-back::after {
+    content: "";
+    position: absolute;
+    bottom: -27.8675px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right:500px solid transparent;
+    border-top: 27.8675px solid rgb(75, 65, 46);
+}
+
+.glass__window-small {
+    width: 0;
+    height: 0;
+    border-bottom: 65px solid rgb(75, 65, 46);
+    border-left: 70px solid transparent;
+    position: absolute;
+    bottom: 0;
+    left: 3px;
+    
+}
+
+.glass__window-small::after {
+    content: "";
+    position: absolute;
+    width: 3px;
+    height: 90px;
+    background: #000;
+    right: -14px;
+    top: -11px;
+    border-radius: 10px 0 0 0;
+    transform: rotate(166deg);
+
+}
+
+
+
+.small-window-glass__mini {
+    width: 0;
+    height: 0;
+    
+    border-bottom: 35px solid rgb(92, 65, 34);
+    border-left: 40px solid transparent;
+    position: absolute;
+    bottom: -60px;
+    left: -46px;
+    transform: rotate(1deg);
+}
+
+.wrapper__frame {
+    width: 750px;
+    margin: -8px 0 0 0;
+    height: 100px;
+    
+    border-radius: 10%/20%;
+    position: relative;
+    overflow: hidden;
+    background: #555;
+    z-index: 1;
+    transform: rotate(-1deg);
+    perspective: 10px;
+    
+} 
+
+.wrapper__mark {
+    position: absolute;
+    height: 50px;
+    width: 5px;
+    background: #555;
+    top: 80px;
+    left: 110px;
+}
+
+.wrapper__mark::before {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 15px;
+    background: #555;
+    left: -40px;
+    box-shadow: -20px 0 20px #333;
+}
+
+.wrapper__mark::after {
+    content: "";
+    position: absolute;
+    width: 38px;
+    height: 10px;
+    background: red;
+    border-radius: 50px;
+    top: 2px;
+    right: 48px;
+    transition: all 0.5s ease 0s;
+    border-radius: 150px / 40px;
+    background: -moz-radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
+  background: -webkit-radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
+  background: -o-radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
+  background: -ms-radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
+  background: radial-gradient(#ffef80, #b86409 60%);
+  background: radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
+  box-shadow: 0 0 10px #eaa121;
+}
+
+.wrapper__mark:hover::after {
+    box-shadow: 0 0 10px 2px orange;
+}
+
+.frame__back-headlight {
+    position: absolute;
+    top: -5px;
+    left: -10px;
+    width: 80px;
+    height: 40px;
+    border: 1px solid red;
+    border-radius: 0 0 20px 0;
+    background: red;
+   
+    
+
+}
+
+.frame__back-headlight::after {
+    content: "";
+    transition: all 1s ease 0s;
+    border: 1px solid rgb(172, 172, 118);
+    background: rgb(172, 172, 118);
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    border-radius: 50%;
+    top: 12px;
+    left: 20px;
+    box-shadow: 0 0 10px rgb(255, 255, 99);
+
+}
+
+.frame__back-headlight::before {
+    content: "";
+    transition: all 1s ease 0s;
+    border: 1px solid rgb(172, 172, 118);
+    background: rgb(172, 172, 118);
+    box-shadow: 0 0 10px rgb(255, 255, 99);
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    border-radius: 50%;
+    top: 12px;
+    right: 10px;
+}
+
+.frame__back-headlight:hover::before, .frame__back-headlight:hover::after  {
+    background: red;
+    box-shadow: 0 0 50px 20px rgb(165, 26, 26);
+}
+
+.frame__front-headlight {
+    position: absolute;
+    top: -5px;
+    right: -6px;
+    width: 80px;
+    height: 40px;
+    border: 1px solid red;
+    border-radius: 0 0 0 20px;
+    background: red;
+}
+
+.frame__front-headlight::before {
+    content: "";
+    border: 1px solid rgb(172, 172, 118);
+    background: yellow;
+    box-shadow: 0 0 10px rgb(235, 235, 87);
+    width: 45px;
+    height: 20px;
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    border-radius: 0 50% 0 30%;
+    transition: all 1s ease 0s;
+}
+
+.frame__front-headlight:hover::before {
+    background: rgb(91, 180, 91);
+    box-shadow: 0 0 50px rgb(117, 235, 87);
+}
+
+.frame__doors {
+    width: 462.8px;
+    height: 80px;
+    border-radius: 0 0 10px 10px;
+    position: relative;
+    left: 142px;
+    top: 0;
+    border: 2.3px solid #000;
+}
+
+.left-doors__oval {
+    width: 96px;
+    height: 63px;
+    border: 4px solid #000;
+    border-radius: 0 0 0 100px;
+    position: absolute;
+    left: -1px;
+    top: 11px;
+    transform: rotate(0deg);
+}
+
+.left-doors__tank {
+    width: 30px;
+    height: 30px;
+    border: 4px solid rgb(73, 17, 17);
+    border-radius: 50%;
+    position: absolute;
+    top: 5px;
+    left: 20px;
+    background: red;
+}
+
+.left-doors__tank:hover {
+    background: #000;
+}
+
+.left-doors__tank::before {
+    content: "";
+    position: absolute;
+    top: 7px;
+    left: 4px;
+    height: 6px;
+    width: 6px;
+    background: #000;
+    border-radius: 50%;
+}
+
+.doors__back {
+    height: 90px;
+    width: 115px;
+    border: 3.5px solid #000;
+    position: absolute;
+    bottom: 2px;
+    left: 91.5px;
+}
+
+.doors__back:after {
+    content: "";
+    width: 113px;
+    height: 3px;
+    position: absolute;
+    background: #000;
+    top: 26.2px;
+    transform: rotate(1deg);
+}
+
+
+
+
+.doors__front {
+    width: 252px;
+    height: 3px;
+    position: absolute;
+    background: #000;
+    top: 16px;
+    right: 0px;
+    transform: rotate(1deg);
+    
+}
+
+.doors__front::after {
+    content: "";
+    width: 252px;
+    height: 3px;
+    position: absolute;
+    background: #000;
+    bottom: -54.5px;
+    right: 0;
+    transform: rotate(-1deg);
+}
+
+.handle {
+    width: 30px;
+    height: 10px;
+    border: 3px solid #000;
+    border-radius: 10px;
+    background: #333;
+}
+
+.back-doors__handle {
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    
+}
+
+.front-doors__handle {
+    position: absolute;
+    top: 12px;
+    left: 30px;
+}
+
+.wrapper__engines {
+    position: relative;
+}
+
+
+.engines__back {
+    position: absolute;
+    width: 16px;
+    height: 40px;
+    background: rgb(131,58,180);
+background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 87%);
+    left: 60px;
+    transform: skew(-30deg);
+}
+
+.engines__back::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 50px;
+    top: 20px;
+    left: -14px;
+    background: rgb(131,58,180);
+background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 87%);
+   
+    transform: rotate(90deg);
+}
+
+.engines__back::before {
+    content: "";
+    position: absolute;
+    height: 10px;
+    width: 40px;
+    top: 39px;
+    border-radius: 50%;
+    left: -80px;
+    background: -moz-radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
+  background: -webkit-radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
+  background: -o-radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
+  background: -ms-radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
+  background: radial-gradient(#ffef80, #b86409 60%);
+  background: radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
+  box-shadow: 0 0 10px #eaa121;
+}
+
+
+.engines__front {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: transparent;
+    box-shadow: 13px 10px rgb(66, 62, 62);
+    transform: rotate(-113deg);
+    position: absolute;
+    top: -6px;
+    left: 590px;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.engines__front::after {
+    content: "";
+    position: absolute;
+    bottom: 0px;
+    left: 50px;
+    width: 40px;
+    height: 70px;
+    border-radius:30%/50%;
+    transform: rotate(-55deg);
+    background: rgb(131,58,180);
+background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 87%);
+    /* отступ слева, ибо при отступе справа ломается картинка */   
+}
+
+.engines__front::before {
+    content: "";
+    width: 20px;
+    height: 30px;
+    position: absolute;
+    top: 20px;
+    left: 19px;
+    border-radius: 50%;
+    transform: rotate(-50deg);
+    background: -moz-radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
+  background: -webkit-radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
+  background: -o-radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
+  background: -ms-radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
+  background: radial-gradient(#ffef80, #b86409 60%);
+  background: radial-gradient(#eaa121, #8e4901 45%, #b86409 80%);
+  box-shadow: 0 0 10px #eaa121;
+}
